@@ -46,11 +46,11 @@ class Route {
 	 */
 	public function bind($tag, $pattern) {
 		/* Basic sanity check */
-		if (!preg_match("/^:[[:alpha:]]+$/", $tag)) {
+		if (!@preg_match("/^:[[:alpha:]]+$/", $tag)) {
 			throw new InvalidArgumentException("Invalid parameter name: $tag");
 		}
 
-		if (preg_match("/$pattern/", null) === false) {
+		if (@preg_match("/$pattern/", null) === false) {
 			throw new InvalidArgumentException("Invalid RegEx pattern: $pattern");
 		}
 
@@ -105,6 +105,10 @@ class Router {
 		return $route;
 	}
 
+	/**
+	 * Remove a Route.
+	 * @param $uri 	URI of the Route to remove
+	 */
 	public function remove($uri) {
 		foreach ($this->routes as $key => $route) {
 			if ($uri == $route->uri) {
@@ -115,6 +119,9 @@ class Router {
 		}
 	}
 
+	/**
+	 * Execute the routing setup as specified, inserting any named bindings for for Route.ß
+	 */
 	public function route() {
 		$req = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $this->uribase;
 
