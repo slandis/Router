@@ -10,6 +10,7 @@
  * @author Shaun Landis <slandis@gmail.com>
  * @copyright 2013 Shaun Landis
  * @license MIT License See LICENSE for more details
+ *
  * Have fun.
  */
 
@@ -82,13 +83,17 @@ class Route {
  * Router class
  *
  * Create and manage Routes for the current application.
+ *
+ * @var $default 	Default content to display if the requested URI is not in the Router table.
  */
 class Router {
 	private $uribase;
 	private $routes = [];
+	public $default;
 
 	function __construct($basepath = '/') {
 		$this->uribase = $basepath;
+		$this->default = function() { header('HTTP/1.1 404 Not Found'); };
 	}
 
 	/**
@@ -148,8 +153,11 @@ class Router {
 				}
 
 				call_user_func_array($route->callback, $callbackParams);
+				return;
 			}
 		}
+
+		call_user_func($this->default);
 	}
 }
 ?>
