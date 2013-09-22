@@ -49,7 +49,7 @@ class Route {
 		if (strstr($tag, ':')) {
 			$bare = substr($tag, 1);
 
-			if (preg_match("/^[:alpha:]+$/", $bare)) {
+			if (preg_match("/^[[:alpha:]]+$/", $bare)) {
 				$this->bindings[$tag] = $pattern;
 			}
 		}
