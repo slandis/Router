@@ -1,0 +1,13 @@
+# Router.php
+# Copyright (C) 2013 Shaun Landis
+# See LICENSE file for copying information
+
+A basic, no-frills URI/Services routing application. Basic URI routing with
+bound named parameters and function callbacks. It works.
+
+# Requirements
+php-5.4+
+Apache2/mod_rewrite
+
+# How do I use it?
+See example.php for how to use.
