@@ -45,14 +45,16 @@ class Route {
 	 * @example $route->bind(':name', '[:alpha:]+');
 	 */
 	public function bind($tag, $pattern) {
-		/* Basic sanity checks */
-		if (strstr($tag, ':')) {
-			$bare = substr($tag, 1);
-
-			if (preg_match("/^[[:alpha:]]+$/", $bare)) {
-				$this->bindings[$tag] = $pattern;
-			}
+		/* Basic sanity check */
+		if (!preg_match("/^:[[:alpha:]]+$/", $tag)) {
+			throw new InvalidArgumentException("Invalid parameter name: $tag");
 		}
+
+		if (preg_match("/$pattern/", null) === false) {
+			throw new InvalidArgumentException("Invalid RegEx pattern: $pattern");
+		}
+
+		$this->bindings[$tag] = $pattern;
 	}
 
 	/**
