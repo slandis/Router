@@ -45,7 +45,14 @@ class Route {
 	 * @example $route->bind(':name', '[:alpha:]+');
 	 */
 	public function bind($tag, $pattern) {
-		$this->bindings[$tag] = $pattern;
+		/* Basic sanity checks */
+		if (strstr($tag, ':')) {
+			$bare = substr($tag, 1);
+
+			if (preg_match("/^[:alpha:]+$/", $bare)) {
+				$this->bindings[$tag] = $pattern;
+			}
+		}
 	}
 
 	/**
