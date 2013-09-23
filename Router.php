@@ -87,12 +87,12 @@ class Route {
  * @var $default 	Default content to display if the requested URI is not in the Router table.
  */
 class Router {
-	private $uribase;
+	private $base;
 	private $routes = [];
 	public $default;
 
-	function __construct($basepath = '/') {
-		$this->uribase = $basepath;
+	function __construct($base) {
+		$this->base = $base;
 		$this->default = function() { header('HTTP/1.1 404 Not Found'); };
 	}
 
@@ -104,7 +104,7 @@ class Router {
 	 * @param $callback Function to call when this Route is requested
 	 */
 	public function add($method, $uri, $callback) {
-		$route = new Route($method, $uri, $callback);
+		$route = new Route($method, $this->base . trim($uri, '/\^$'), $callback);
 		$this->routes[] = $route;
 
 		return $route;
