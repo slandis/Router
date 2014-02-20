@@ -2,7 +2,7 @@
 require('Router.php');
 
 /* Create a new instance of the Router class */
-$router = new Router();
+$router = new Router('/');
 
 /* You can add a simple route with a closure-style function */
 $route = $router->add(['GET'], '/', function() {
