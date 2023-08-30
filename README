@@ -1,5 +1,5 @@
 # Router.php
-# Copyright (C) 2013 Shaun Landis
+# Copyright (C) 2013-2023 Shaun Landis
 # See LICENSE file for copying information
 
 A basic, no-frills URI/Services routing application. Basic URI routing with

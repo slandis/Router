@@ -32,7 +32,7 @@ class Route {
 	public $callback;
 	private $bindings = [];
 
-	function __construct($method = [], $uri, $callback) {
+	function __construct($method, $uri, $callback) {
 		$this->method = $method;
 		$this->uri = $uri;
 		$this->callback = $callback;
@@ -125,7 +125,7 @@ class Router {
 	}
 
 	/**
-	 * Execute the routing setup as specified, inserting any named bindings for for Route.ß
+	 * Execute the routing setup as specified, inserting any named bindings for the Route.
 	 */
 	public function route() {
 		$req = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $this->uribase;
@@ -134,7 +134,7 @@ class Router {
 			$uri = $route->uri;
 			if (strstr($route->uri, ':')) {
 				foreach ($route->getBindings() as $tag => $parameter) {
-					$uri = str_replace($tag, $parameter, $route->uri);
+					$uri = str_replace($tag, $parameter, $uri);
 				}
 			}
 
